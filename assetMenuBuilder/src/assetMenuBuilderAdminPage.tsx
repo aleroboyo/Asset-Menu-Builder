@@ -1,4 +1,4 @@
-export function assetMenuBuilderAdminPage () {
+export function AssetMenuBuilderAdminPage () {
     return (
         <>
             <title>Asset Menu Builder Admin</title>
