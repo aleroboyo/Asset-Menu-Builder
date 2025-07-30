@@ -1,8 +1,13 @@
+import { useState } from "react"
+import { AddItem, type Asset } from "./component/AddItem"
+
 export function AssetMenuBuilderAdminPage () {
+    const [menuItems, setMenuItems] = useState<Asset[]>([])
+
     return (
         <>
             <title>Asset Menu Builder Admin</title>
-
+  
             <div>
                 <div>
                     <h1>Asset Menu Builder Admin</h1>
@@ -16,25 +21,7 @@ export function AssetMenuBuilderAdminPage () {
                         <div>
                             <h3>Create Menu Item</h3>
                             
-                            <div>
-                                <label>Label</label>
-                                <input type="text"/>
-                            </div>
-
-                            <div>
-                                <label>Type</label>
-                                <input type="text"/>
-                            </div>
-
-                            <div>
-                                <label>Icon</label>
-                                <input type="text"/>
-                            </div>
-
-                            <div>
-                                <label>Show in Nav</label>
-                                <input type="checkbox"></input>
-                            </div>
+                            <AddItem setMenuItems={setMenuItems} />
                         </div>
                     </div>
 
@@ -51,12 +38,13 @@ export function AssetMenuBuilderAdminPage () {
                                     <th>Metadata</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>48748</td>
-                                        <td>Hp Laptop</td>
-                                        <td>Laptop</td>
-                                        <td>Show in Nav: Yes, Icon: 💻</td>
-                                    </tr>
+                                    {menuItems.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.label}</td>
+                                            <td>{item.type}</td>
+                                            <td>Show in Nav: {item.metaData.showInNav} {item.metaData.icon && `, Icon: ${item.metaData.icon}`}</td>
+                                        </tr>))}
                                 </tbody>
                             </table>
                         </div>
